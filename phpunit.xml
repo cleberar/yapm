@@ -1,0 +1,23 @@
+<phpunit 
+    bootstrap="tests/bootstrap.php" 
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true"
+    stopOnFailure="false"
+    >
+
+    <testsuite name="Yapm Test Suite">
+        <directory>tests</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist>
+            <directory>./Yapm/</directory>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="testdox-text" target="php://stdout" showUncoveredFiles="false"/>
+    </logging>
+</phpunit>
