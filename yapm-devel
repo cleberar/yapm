@@ -1,0 +1,38 @@
+#!/usr/bin/env php
+<?php
+/**
+ *
+ * PHP version 5
+ *
+ * @package   Yapm
+ * @author    Cleber Rodrigues <cleber@cleberrodrigues.com>
+ */
+
+if (!file_exists(__DIR__ . "/vendor/")) {
+    print "Could not open file, install composer http://getcomposer.org/";
+    exit(1);
+}
+
+require __DIR__ . "/vendor/autoload.php";
+
+try {
+    date_default_timezone_set('America/Sao_Paulo');
+    new Yapm\Lib\Conf(__DIR__ ."/config/yapm-devel.ini");
+    $cli = new Yapm\Devel\Cli();
+    $cli->run();
+
+    exit(0);
+
+} catch (Exception $e) {
+
+    if ($e instanceof UnexpectedValueException) {
+        $error = "unexpected value, %s (%s)";
+    } else if ($e instanceof InvalidArgumentException) {
+        $error = "invalid argument, %s (%s)";
+    } else {
+        $error = "unexpected error, %s (%s)";
+    }
+
+    printf($error, $e->getMessage(), $e->getCode());
+    exit(1);
+}
